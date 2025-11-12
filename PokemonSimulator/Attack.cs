@@ -2,29 +2,9 @@
 
 internal class Attack
 {
-	private string _name = string.Empty;
-
-	public string Name
-	{
-		get;
-		private set;
-	}
-
-	private ElementType _type;
-
-	public ElementType Type
-	{
-		get;
-		private set;
-	}
-
-	private int _basePower;
-
-	public int BasePower
-    {
-		get;
-		private set;
-	}
+	public string Name { get; private set; }
+	public ElementType Type { get; private set; }
+	public int BasePower { get; private set; }
 
 	public Attack(string name, ElementType type, int basePower)
 	{
@@ -35,6 +15,6 @@ internal class Attack
 
     public void Use(int level)
     {
-        // Implementation of attack usage
+        Console.WriteLine($"{Name} hit with a total power of {BasePower + level}");
     }
 }
