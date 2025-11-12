@@ -2,7 +2,7 @@
 
 internal class GrassPokemon : Pokemon
 {
-    public GrassPokemon(string name, int level) : base(name, level)
+    public GrassPokemon(int level) : base(level)
     {
     }
 }

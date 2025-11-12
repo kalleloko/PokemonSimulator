@@ -38,9 +38,8 @@ internal abstract class Pokemon
 
     public ElementType Type { get; protected set; }
 
-    public Pokemon(string name, int level)
+    public Pokemon(int level)
     {
-        Name = name;
         Level = level;
     }
 

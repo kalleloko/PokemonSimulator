@@ -2,7 +2,7 @@
 
 internal class FirePokemon : Pokemon, IEvolvable
 {
-    public FirePokemon(string name, int level) : base(name, level)
+    public FirePokemon(int level) : base(level)
     {
     }
 

@@ -5,12 +5,9 @@ internal class Program
     static void Main(string[] args)
     {
         List<Pokemon> pokemons = new List<Pokemon>();
-        Pokemon charmander = new FirePokemon(name: "Charmander", level: 1);
-        Pokemon squirtle = new WaterPokemon(name: "Squirtle", level: 1);
-        Pokemon bulbasaur = new GrassPokemon(name: "Bulbasaur", level: 1);
-        pokemons.Add(charmander);
-        pokemons.Add(squirtle);
-        pokemons.Add(bulbasaur);
+        pokemons.Add(new Charmander(level: 1));
+        pokemons.Add(new Squirtle(level: 1));
+        pokemons.Add(new Bulbasaur(level: 1));
 
         foreach (Pokemon pokemon in pokemons)
         {

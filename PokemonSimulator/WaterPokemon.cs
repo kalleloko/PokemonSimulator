@@ -2,7 +2,7 @@
 
 internal class WaterPokemon : Pokemon
 {
-    public WaterPokemon(string name, int level) : base(name, level)
+    public WaterPokemon(int level) : base(level)
     {
     }
 }
