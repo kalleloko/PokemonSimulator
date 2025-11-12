@@ -5,6 +5,7 @@ namespace PokemonSimulator;
 internal abstract class Pokemon
 {
     protected string _name = string.Empty;
+    private List<Attack> _attacks = new List<Attack>();
 
     public string Name
     {
@@ -43,13 +44,20 @@ internal abstract class Pokemon
         Level = level;
     }
 
-    internal void Attack()
+    public void RandomAttack()
+    {
+        Random rnd = new Random();
+        int attackIndex = rnd.Next(_attacks.Count);
+        int level = rnd.Next(10);
+        _attacks[attackIndex].Use(level);
+    }
+    public void Attack()
     {
         throw new NotImplementedException();
     }
 
-    internal void RaiseLevel(int level)
+    public void RaiseLevel(int level)
     {
-        throw new NotImplementedException();
+        Level++;
     }
 }
