@@ -2,7 +2,7 @@
 {
     internal class Squirtle : WaterPokemon
     {
-        public Squirtle(int level) : base(level)
+        public Squirtle(int level, List<Attack> attacks) : base(level, attacks)
         {
             Name = "Squirtle";
         }

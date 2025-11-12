@@ -1,12 +1,11 @@
-﻿using System.Reflection.Emit;
-
-namespace PokemonSimulator;
+﻿namespace PokemonSimulator;
 
 internal abstract class Pokemon
 {
-    protected string _name = string.Empty;
-    private List<Attack> _attacks = new List<Attack>();
 
+    protected List<Attack> _attacks = new List<Attack>();
+
+    protected string _name = string.Empty;
     public string Name
     {
         get => _name;
@@ -39,21 +38,24 @@ internal abstract class Pokemon
 
     public ElementType Type { get; protected set; }
 
-    public Pokemon(int level)
+    public Pokemon(int level, List<Attack> attacks)
     {
         Level = level;
+        _attacks = attacks;
     }
 
     public void RandomAttack()
     {
         Random rnd = new Random();
         int attackIndex = rnd.Next(_attacks.Count);
-        int level = rnd.Next(10);
-        _attacks[attackIndex].Use(level);
+        _attacks[attackIndex].Use(Level);
     }
     public void Attack()
     {
-        throw new NotImplementedException();
+        foreach(var attack in _attacks)
+        {
+            attack.Use(Level);
+        }
     }
 
     public void RaiseLevel(int level)

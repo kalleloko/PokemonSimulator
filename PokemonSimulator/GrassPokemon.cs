@@ -2,7 +2,8 @@
 
 internal class GrassPokemon : Pokemon
 {
-    public GrassPokemon(int level) : base(level)
+    public GrassPokemon(int level, List<Attack> attacks) : base(level, attacks)
     {
+        Type = ElementType.Grass;
     }
 }

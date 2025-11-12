@@ -2,7 +2,7 @@
 {
     internal class Bulbasaur : GrassPokemon
     {
-        public Bulbasaur(int level) : base(level)
+        public Bulbasaur(int level, List<Attack> attacks) : base(level, attacks)
         {
             Name = "Bulbasaur";
         }

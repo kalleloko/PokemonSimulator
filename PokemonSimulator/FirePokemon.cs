@@ -1,13 +1,10 @@
 ﻿namespace PokemonSimulator;
 
-internal class FirePokemon : Pokemon, IEvolvable
+internal class FirePokemon : Pokemon
 {
-    public FirePokemon(int level) : base(level)
+    public FirePokemon(int level, List<Attack> attacks) : base(level, attacks)
     {
+        Type = ElementType.Fire;
     }
 
-    public void Evolve()
-    {
-        throw new NotImplementedException();
-    }
 }
