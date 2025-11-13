@@ -1,6 +1,6 @@
 ﻿namespace PokemonSimulator;
 
-internal class GrassPokemon : Pokemon
+internal abstract class GrassPokemon : Pokemon
 {
     public GrassPokemon(int level, List<Attack> attacks) : base(level, attacks)
     {

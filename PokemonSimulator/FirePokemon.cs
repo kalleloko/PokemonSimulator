@@ -1,6 +1,6 @@
 ﻿namespace PokemonSimulator;
 
-internal class FirePokemon : Pokemon
+internal abstract class FirePokemon : Pokemon
 {
     public FirePokemon(int level, List<Attack> attacks) : base(level, attacks)
     {

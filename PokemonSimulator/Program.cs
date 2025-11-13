@@ -1,9 +1,14 @@
-﻿namespace PokemonSimulator;
+﻿using PokemonSimulator.Utilities;
+using System.Diagnostics;
+
+namespace PokemonSimulator;
 
 internal class Program
 {
+    static IUI ui = new ConsoleUI();
     static void Main(string[] args)
     {
+
         Attack flamethrower = new Attack(name: "Flamethrower", type: ElementType.Fire, basePower: 12);
         Attack ember = new Attack(name: "Ember", type: ElementType.Fire, basePower: 8);
         Attack waterGun = new Attack(name: "Water Gun", type: ElementType.Water, basePower: 6);
@@ -16,23 +21,59 @@ internal class Program
         pokemons.Add(new Squirtle(level: 1, new List<Attack>() { waterGun, bubble }));
         pokemons.Add(new Bulbasaur(level: 1, new List<Attack>() { vineWhip, razorLeaf }));
 
-
-        foreach (Pokemon pokemon in pokemons)
+        while (true)
         {
-            try
+            ui.Clear();
+            ui.PrintLine("Starting a new training round...");
+            ui.PrintLine("--------------------------------");
+            ui.PrintEmptyLines();
+            foreach (Pokemon pokemon in pokemons)
             {
-                pokemon.RaiseLevel(level: 5);
-                pokemon.Attack();
-                if (pokemon is IEvolvable evolvablePokemon)
+                ui.PrintLine($"Training {pokemon.Name} (Level {pokemon.Level})...");
+                try
                 {
-                    evolvablePokemon.Evolve();
+                    ui.PrintEmptyLines();
+                    pokemon.RaiseLevel();
+                    ui.PrintEmptyLines();
+                    int attackIndex = AskForAttackIndex(pokemon);
+                    pokemon.Attack(1);
+                    if (pokemon is IEvolvable evolvablePokemon)
+                    {
+                        evolvablePokemon.Evolve();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ui.PrintErrorLine($"Failed to train {pokemon.Name}: {ex.Message}");
+                    ui.PrintLine(ex.StackTrace);
                 }
             }
-            catch (Exception ex)
+            ui.PrintEmptyLines();
+            ui.PrintLine("Training round completed!");
+            ui.Print($"Press anything to continue training, or 'q' to quit.{Environment.NewLine}");
+            ConsoleKey key = Console.ReadKey(true).Key;
+            if(key == ConsoleKey.Q)
             {
-                Console.WriteLine($"Failed to train {pokemon.Name}: {ex.Message}");
+                ui.Print("bye");
+                break;
             }
         }
 
+    }
+
+    private static int AskForAttackIndex(Pokemon pokemon)
+    {
+        return ui.SelectInput<int>(
+            options: pokemon.Attacks
+                .Select((attack, index) => new { attack, index })
+                .ToDictionary(a => (char)('A' + a.index), a => a.index),
+            displayFunc: attackIndex => 
+            {
+                Attack attack = pokemon.Attacks.ElementAt(attackIndex);
+                return $"{attack.Name} (Type: {attack.Type}, Power: {attack.BasePower})";
+            },
+            prompt: $"Select an attack for {pokemon.Name}:",
+            errorMessage: "Invalid attack selection, please try again."
+        );
     }
 }
