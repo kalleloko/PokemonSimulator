@@ -1,5 +1,4 @@
-﻿
-namespace PokemonSimulator.Utilities;
+﻿namespace PokemonSimulator.Interfaces;
 /// <summary>
 /// Represents a user interface abstraction for interacting with users through input and output operations.
 /// </summary>

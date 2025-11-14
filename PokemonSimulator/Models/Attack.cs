@@ -1,4 +1,6 @@
-﻿namespace PokemonSimulator;
+﻿using PokemonSimulator.Enums;
+
+namespace PokemonSimulator.Models;
 
 internal class Attack
 {

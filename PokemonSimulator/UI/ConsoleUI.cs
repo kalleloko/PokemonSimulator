@@ -1,7 +1,8 @@
-﻿using System.Reflection;
+﻿using PokemonSimulator.Interfaces;
+using System.Reflection;
 using System.Text;
 
-namespace PokemonSimulator.Utilities;
+namespace PokemonSimulator.UI;
 
 public class ConsoleUI : IUI
 {
@@ -52,7 +53,7 @@ public class ConsoleUI : IUI
         else
         {
             PrintErrorLine(errorMessage);
-            return SelectInput<T>(options, displayFunc, prompt, errorMessage);
+            return SelectInput(options, displayFunc, prompt, errorMessage);
         }
     }
 
@@ -145,9 +146,9 @@ public class ConsoleUI : IUI
     {
         StringBuilder sb = new StringBuilder();
         int length = content.Length + 6;
-        sb.AppendLine("┌" + (new string('─', length)) + "┐");
+        sb.AppendLine("┌" + new string('─', length) + "┐");
         sb.AppendLine($"│   {content}   │");
-        sb.AppendLine("└" + (new string('─', length)) + "┘");
+        sb.AppendLine("└" + new string('─', length) + "┘");
         return sb.ToString();
     }
     /// <inheritdoc/>

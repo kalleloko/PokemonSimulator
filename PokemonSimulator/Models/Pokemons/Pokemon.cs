@@ -1,4 +1,6 @@
-﻿namespace PokemonSimulator;
+﻿using PokemonSimulator.Enums;
+
+namespace PokemonSimulator.Models.Pokemons;
 
 internal abstract class Pokemon
 {

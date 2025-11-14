@@ -1,4 +1,7 @@
-﻿namespace PokemonSimulator;
+﻿using PokemonSimulator.Extensions;
+using PokemonSimulator.Interfaces;
+
+namespace PokemonSimulator.Models.Pokemons;
 
 internal class Squirtle : WaterPokemon, IEvolvable
 {
@@ -20,7 +23,7 @@ internal class Squirtle : WaterPokemon, IEvolvable
     public (string oldName, int oldLevel, bool didEvolve) Evolve()
     {
         string oldName = Name;
-        Name = Utils.SelectNext<string>(Name, _evolutions);
+        Name = _evolutions.SelectItemAfter(Name) ?? Name;
         bool didEvolve = oldName != Name;
         int oldLevel = Level;
         if (didEvolve)

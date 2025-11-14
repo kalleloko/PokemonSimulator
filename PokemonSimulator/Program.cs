@@ -1,4 +1,8 @@
-﻿using PokemonSimulator.Utilities;
+﻿using PokemonSimulator.Enums;
+using PokemonSimulator.Interfaces;
+using PokemonSimulator.Models;
+using PokemonSimulator.Models.Pokemons;
+using PokemonSimulator.UI;
 
 namespace PokemonSimulator;
 

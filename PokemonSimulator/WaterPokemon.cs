@@ -1,4 +1,8 @@
-﻿namespace PokemonSimulator;
+﻿using PokemonSimulator.Enums;
+using PokemonSimulator.Models;
+using PokemonSimulator.Models.Pokemons;
+
+namespace PokemonSimulator;
 
 internal abstract class WaterPokemon : Pokemon
 {
