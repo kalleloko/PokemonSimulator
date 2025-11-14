@@ -6,7 +6,7 @@ internal abstract class Pokemon
     private List<Attack> _attacks = new List<Attack>();
     private string _name = string.Empty;
     private int _level = 1;
-    
+
 
     public IEnumerable<Attack> Attacks
     {
@@ -51,23 +51,24 @@ internal abstract class Pokemon
         Name = GetType().Name;
     }
 
-    public void RandomAttack()
+    public (Attack attack, int power) RandomAttack()
     {
         Random rnd = new Random();
         int attackIndex = rnd.Next(_attacks.Count);
-        _attacks[attackIndex].Use(Level);
+        return Attack(attackIndex);
     }
-    public void Attack(int index)
+    public (Attack attack, int power) Attack(int index)
     {
         Attack? attack = _attacks[index] ?? throw new ArgumentOutOfRangeException(
             nameof(index),
             $"No attack found at index {index} in {GetType().Name}."
         );
-        attack.Use(Level);
+        int power = attack.Use(Level);
+        return (attack, power);
     }
 
     public void RaiseLevel()
     {
         Level++;
     }
-}   
+}

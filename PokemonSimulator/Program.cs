@@ -1,5 +1,4 @@
 ﻿using PokemonSimulator.Utilities;
-using System.Diagnostics;
 
 namespace PokemonSimulator;
 
@@ -15,8 +14,7 @@ internal class Program
         {
             ui.Clear();
             ui.PrintLine("Starting a new training round...");
-            ui.PrintLine("--------------------------------");
-            ui.PrintEmptyLines();
+            ui.PrintLine("--------------------------------", 1);
             foreach (Pokemon pokemon in pokemons)
             {
                 ui.PrintEmptyLines();
@@ -26,16 +24,21 @@ internal class Program
                     pokemon.RaiseLevel();
                     ui.PrintEmptyLines();
                     int attackIndex = AskForAttackIndex(pokemon);
-                    pokemon.Attack(1);
+                    var (attack, power) = pokemon.Attack(1);
+                    ui.PrintLine($"{attack.Name} hit with a total power of {power}");
+
                     if (pokemon is IEvolvable evolvablePokemon)
                     {
-                        evolvablePokemon.Evolve();
+                        var (oldName, oldLevel, didEvolve) = evolvablePokemon.Evolve();
+                        ui.PrintLine(didEvolve ?
+                            $"{oldName} is evolving... Now it is a {pokemon.Name} and it's level is {pokemon.Level}" :
+                            $"{oldName} cannot evolve more"
+                        );
                     }
                 }
                 catch (Exception ex)
                 {
                     ui.PrintErrorLine($"Failed to train {pokemon.Name}: {ex.Message}");
-                    ui.PrintLine(ex.StackTrace);
                 }
             }
             ui.PrintEmptyLines();

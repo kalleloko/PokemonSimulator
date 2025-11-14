@@ -52,7 +52,8 @@ public interface IUI
     /// Writes the specified prompt followed by a newline to the output.
     /// </summary>
     /// <param name="prompt">The text to write to the output.</param>
-    public void PrintLine(string? prompt);
+    /// <param name="addEmptyLines">Number of extra empty lines to add after the text.</param>
+    public void PrintLine(string? prompt, int addEmptyLines = 0);
 
     /// <summary>
     /// Writes the specified prompt, intended for error messages, followed by a newline to the output.

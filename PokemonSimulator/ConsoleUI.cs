@@ -66,12 +66,13 @@ public class ConsoleUI : IUI
     /// <summary>
     /// Does nothing if prompt is null, empty, or whitespace.
     /// </summary>
-    public void PrintLine(string? prompt)
+    public void PrintLine(string? prompt, int addEmptyLines = 0)
     {
         if (!string.IsNullOrWhiteSpace(prompt))
         {
             Console.WriteLine(prompt);
         }
+        PrintEmptyLines(addEmptyLines);
     }
 
     /// <inheritdoc/>

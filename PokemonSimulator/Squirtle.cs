@@ -10,16 +10,23 @@ internal class Squirtle : WaterPokemon, IEvolvable
     public Squirtle(int level, List<Attack> attacks) : base(level, attacks)
     { }
 
-    public void Evolve()
+    /// <summary>
+    /// Evolves the current entity to its next stage, if possible.
+    /// </summary>
+    /// <remarks>The evolution process updates the entity's name to the next available stage in the
+    /// evolution sequence and increases its level by 10. If the entity cannot evolve further, its name remains
+    /// unchanged, and no level increase occurs.
+    /// ToDo: This method is duplicated in other IEvolvable Pokemons. Find solution</remarks>
+    public (string oldName, int oldLevel, bool didEvolve) Evolve()
     {
         string oldName = Name;
         Name = Utils.SelectNext<string>(Name, _evolutions);
-        if (oldName == Name)
+        bool didEvolve = oldName != Name;
+        int oldLevel = Level;
+        if (didEvolve)
         {
-            Console.WriteLine($"{oldName} cannot evolve more");
-            return;
+            Level += 10;
         }
-        Level += 10;
-        Console.WriteLine($"{oldName} is evolving... Now it is a {Name} and it's level is {Level}");
+        return (oldName, oldLevel, didEvolve);
     }
 }
