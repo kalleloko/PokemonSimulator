@@ -24,7 +24,7 @@ internal class Program
                     pokemon.RaiseLevel();
                     ui.PrintEmptyLines();
                     int attackIndex = AskForAttackIndex(pokemon);
-                    var (attack, power) = pokemon.Attack(1);
+                    var (attack, power) = pokemon.Attack(attackIndex);
                     ui.PrintLine($"{attack.Name} hit with a total power of {power}");
 
                     if (pokemon is IEvolvable evolvablePokemon)
@@ -72,10 +72,11 @@ internal class Program
 
     private static int AskForAttackIndex(Pokemon pokemon)
     {
-        return ui.SelectInput<int>(
-            options: pokemon.Attacks
+        var options = pokemon.Attacks
                 .Select((attack, index) => new { attack, index })
-                .ToDictionary(a => (char)('A' + a.index), a => a.index),
+                .ToDictionary(a => (char)('A' + a.index), a => a.index);
+        var selected = ui.SelectInput<int>(
+            options: options,
             displayFunc: attackIndex =>
             {
                 Attack attack = pokemon.Attacks.ElementAt(attackIndex);
@@ -84,5 +85,6 @@ internal class Program
             prompt: $"Select an attack for {pokemon.Name}:",
             errorMessage: "Invalid attack selection, please try again."
         );
+        return selected;
     }
 }
